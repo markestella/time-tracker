@@ -25,8 +25,8 @@ export function UserNotificationBell() {
         const data = await res.json();
         setNotifications(data);
       }
-    } catch (error) {
-      console.error("Failed to fetch notifications", error);
+    } catch {
+      // Silently handle fetch failure
     }
   };
 
@@ -62,7 +62,7 @@ export function UserNotificationBell() {
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Your Notifications</DialogTitle>
-          <DialogDescription>Answers to questions you've asked.</DialogDescription>
+          <DialogDescription>Answers to questions you&apos;ve asked.</DialogDescription>
         </DialogHeader>
         <div className="mt-4 space-y-4 max-h-[60vh] overflow-y-auto pr-4">
           {notifications.map((q) => (

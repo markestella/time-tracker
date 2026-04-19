@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   if (session?.user?.role !== 'ADMIN') {
@@ -15,13 +15,14 @@ export async function PATCH(
   try {
     await req.text();
 
-    const messageId = parseInt(params.id);
+    const { id } = await params;
+    const messageId = parseInt(id);
     const updatedMessage = await prisma.message.update({
       where: { id: messageId },
       data: { isRead: true },
     });
     return NextResponse.json(updatedMessage, { status: 200 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to update message' }, { status: 500 });
   }
 }

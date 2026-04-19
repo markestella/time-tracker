@@ -57,7 +57,7 @@ export function UserList({ initialUsers }: Props) {
       setUsers(users.filter((user) => user.id !== userId));
       toast.success('User deleted successfully.');
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error('Failed to delete user.');
     }
   };
@@ -145,7 +145,7 @@ export function UserList({ initialUsers }: Props) {
       <Dialog open={!!viewingUser} onOpenChange={(isOpen) => !isOpen && setViewingUser(null)}>
         <DialogContent className="max-w-4xl h-[90vh] flex flex-col">
           <DialogHeader>
-            <DialogTitle>{viewingUser?.firstName} {viewingUser?.lastName}'s Activity</DialogTitle>
+            <DialogTitle>{viewingUser?.firstName} {viewingUser?.lastName}&apos;s Activity</DialogTitle>
             <DialogDescription>{viewingUser?.email}</DialogDescription>
           </DialogHeader>
           <div className="mt-4 flex-grow overflow-hidden">

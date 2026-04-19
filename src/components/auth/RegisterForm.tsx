@@ -48,7 +48,8 @@ export function RegisterForm() {
     
     setIsLoading(true);
     try {
-      const { confirmPassword, ...submissionData } = formData;
+      const { firstName, lastName, username, email, password } = formData;
+      const submissionData = { firstName, lastName, username, email, password };
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -64,7 +65,7 @@ export function RegisterForm() {
         const data = await res.json();
         toast.error('Registration failed', { description: data.error });
       }
-    } catch (error) {
+    } catch {
       toast.error('An error occurred.');
     } finally {
       setIsLoading(false);

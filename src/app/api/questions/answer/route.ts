@@ -26,7 +26,7 @@ export async function PATCH(req: Request) {
     await Promise.all(updatePromises);
 
     return NextResponse.json({ message: 'Answers submitted successfully' }, { status: 200 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to submit answers' }, { status: 500 });
   }
 }

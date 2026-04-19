@@ -37,7 +37,7 @@ export function ProfileForm({ user }: { user: User }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const dataToUpdate: any = {};
+    const dataToUpdate: Record<string, string> = {};
     if (formData.firstName !== user.firstName) dataToUpdate.firstName = formData.firstName;
     if (formData.lastName !== user.lastName) dataToUpdate.lastName = formData.lastName;
     if (formData.username !== user.username) dataToUpdate.username = formData.username;
@@ -75,7 +75,7 @@ export function ProfileForm({ user }: { user: User }) {
       } else {
         toast.error('Update Failed', { description: data.error });
       }
-    } catch (error) {
+    } catch {
       toast.error('An error occurred.');
     } finally {
       setIsLoading(false);

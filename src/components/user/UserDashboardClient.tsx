@@ -123,7 +123,7 @@ export function UserDashboardClient({ user, initialLastEvent }: UserDashboardCli
 
       setActivityRefreshKey(prevKey => prevKey + 1);
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error('An error occurred.');
     } finally {
       setIsLoading(false);

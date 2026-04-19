@@ -45,7 +45,7 @@ export async function POST(req: Request) {
       }
     });
     return NextResponse.json(newUser, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'User with this email or username may already exist.' }, { status: 409 });
   }
 }

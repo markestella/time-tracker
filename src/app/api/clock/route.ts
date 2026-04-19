@@ -41,8 +41,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(clockEvent, { status: 201 });
-  } catch (error) {
-    console.log(error);
+  } catch {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }

@@ -6,10 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Bell, LogIn, LogOut } from 'lucide-react';
 import { MessageWithRelations } from './AdminDashboardClient';
 
+interface NotificationData {
+  user: { username: string };
+  content: string;
+  isRead?: boolean;
+  createdAt?: Date;
+}
+
 interface Notification {
   id: string;
   type: 'CLOCK_IN' | 'CLOCK_OUT_MESSAGE';
-  data: any;
+  data: NotificationData;
   createdAt: Date;
 }
 
@@ -28,8 +35,8 @@ export function NotificationBell({ onViewMessage }: NotificationBellProps) {
         if (res.ok) {
           setNotifications(await res.json());
         }
-      } catch (error) {
-        console.error("Failed to fetch notifications", error);
+      } catch {
+        // Silently handle fetch failure
       }
     };
     

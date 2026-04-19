@@ -74,7 +74,7 @@ export function AdminDashboardClient({ user, initialUsers, initialStats, initial
     try {
       await fetch(`/api/messages/${messageId}/read`, { method: 'PATCH' });
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error("Failed to dismiss message.");
     }
   };
@@ -111,7 +111,7 @@ export function AdminDashboardClient({ user, initialUsers, initialStats, initial
       
       setSelectedMessage(null);
       setAnswers({});
-    } catch (error) {
+    } catch {
        toast.error("Failed to submit answers.");
     } finally {
        setIsLoading(false);

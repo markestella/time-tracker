@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
@@ -55,8 +55,7 @@ export function ActivityHistory({ userId }: ActivityHistoryProps) {
           const res = await fetch(apiUrl);
           const data: ActivityEvent[] = await res.json();
           setActivities(data);
-        } catch (error) {
-          console.error('Failed to fetch activities', error);
+        } catch {
           setActivities([]);
         } finally {
           setIsLoading(false);
@@ -153,7 +152,7 @@ export function ActivityHistory({ userId }: ActivityHistoryProps) {
                                   <div className="space-y-4">
                                     <div>
                                       <h4 className="font-medium leading-none">Daily Summary</h4>
-                                      <p className="text-sm text-muted-foreground italic">"{event.message.content}"</p>
+                                      <p className="text-sm text-muted-foreground italic">&ldquo;{event.message.content}&rdquo;</p>
                                     </div>
                                     {event.message.questions.length > 0 && (
                                       <div className="space-y-2">

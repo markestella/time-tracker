@@ -50,7 +50,7 @@ export function AddUserForm({ onUserAdded }: AddUserFormProps) {
         const data = await res.json();
         toast.error('Creation Failed', { description: data.error });
       }
-    } catch (error) {
+    } catch {
        toast.error('An error occurred.');
     } finally {
        setIsLoading(false);

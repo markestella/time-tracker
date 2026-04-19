@@ -60,7 +60,7 @@ export function QuoteManager() {
       } else {
         throw new Error("Failed to save quote");
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred while saving the quote.");
     } finally {
       setIsSaving(false); 

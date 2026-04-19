@@ -59,7 +59,7 @@ export async function PUT(req: Request) {
     });
 
     return NextResponse.json({ message: 'Profile updated successfully' }, { status: 200 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Something went wrong during the update.' }, { status: 500 });
   }
 }
