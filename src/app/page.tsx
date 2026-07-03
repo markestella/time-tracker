@@ -6,13 +6,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 async function getQuoteOfTheDay() {
-  const today = startOfDay(new Date());
-  const quote = await prisma.quoteOfTheDay.findUnique({
-    where: { date: today },
-  });
+  try {
+    const today = startOfDay(new Date());
+    const quote = await prisma.quoteOfTheDay.findUnique({
+      where: { date: today },
+    });
 
-  if (quote) {
-    return { quote: quote.quote, author: quote.author };
+    if (quote) {
+      return { quote: quote.quote, author: quote.author };
+    }
+  } catch {
+    // Use the fallback quote if the database is unavailable during build/startup.
   }
 
   return {

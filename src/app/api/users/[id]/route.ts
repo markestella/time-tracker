@@ -15,6 +15,11 @@ export async function DELETE(
   try {
     const { id } = await params;
     const userId = parseInt(id);
+
+    if (Number.isNaN(userId)) {
+      return NextResponse.json({ error: 'Invalid user id' }, { status: 400 });
+    }
+
     await prisma.user.delete({ where: { id: userId } });
     return NextResponse.json({ message: 'User deleted' }, { status: 200 });
   } catch {

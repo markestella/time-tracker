@@ -9,8 +9,11 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Start seeding...');
 
-  const adminEmail = 'admin@thynetwork.com';
-  const adminPin = 'AdminPass123!'; 
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@thynetwork.com';
+  const adminUsername = process.env.ADMIN_USERNAME || 'Admin';
+  const adminPin = process.env.ADMIN_PASSWORD || 'AdminPass123!';
+  const adminFirstName = process.env.ADMIN_FIRST_NAME || 'Admin';
+  const adminLastName = process.env.ADMIN_LAST_NAME || 'User';
 
   const existingAdmin = await prisma.user.findUnique({
     where: { email: adminEmail },
@@ -21,10 +24,10 @@ async function main() {
 
     await prisma.user.create({
       data: {
-        firstName: 'Admin',
-        lastName: 'User',   
+        firstName: adminFirstName,
+        lastName: adminLastName,   
         email: adminEmail,
-        username: 'Admin',
+        username: adminUsername,
         password: hashedPassword,
         role: Role.ADMIN,
       },

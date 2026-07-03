@@ -26,7 +26,7 @@ export async function GET() {
 
     const onBreak = activeUsers.filter(user => user.clockEvents[0]?.type === 'BREAK_START').length;
     
-    const currentlyClockedIn = activeUsers.filter(user => ['IN', 'BREAK_START'].includes(user.clockEvents[0]?.type)).length;
+    const currentlyClockedIn = activeUsers.filter(user => ['IN', 'BREAK_START', 'BREAK_END'].includes(user.clockEvents[0]?.type)).length;
 
     return NextResponse.json({
         activeUsers: currentlyClockedIn,

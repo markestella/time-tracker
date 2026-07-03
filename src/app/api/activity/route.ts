@@ -29,9 +29,17 @@ export async function GET(req: NextRequest) {
     userIdToQuery = parseInt(session.user.id);
   }
 
+  if (Number.isNaN(userIdToQuery)) {
+    return NextResponse.json({ error: 'Invalid userId parameter' }, { status: 400 });
+  }
+
   try {
     const startDate = new Date(from);
     const endDate = new Date(to);
+
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+      return NextResponse.json({ error: 'Invalid date range parameters' }, { status: 400 });
+    }
 
     const activities = await prisma.clockEvent.findMany({
       where: {
