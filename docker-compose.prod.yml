@@ -26,9 +26,9 @@ services:
       - .env
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-timeclock_user}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:-timeclock_db}?schema=public
-      PORT: 3000
+      PORT: 3001
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3001:3001"
 
 volumes:
   postgres_data:
