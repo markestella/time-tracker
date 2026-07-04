@@ -1,4 +1,4 @@
-# Time Clock
+# Mckbyte TimeTracker
 
 Employee time-tracking application built with Next.js 15, Prisma, NextAuth, and PostgreSQL.
 
@@ -38,7 +38,7 @@ docker-compose up -d
 With Docker, use this connection string:
 
 ```
-DATABASE_URL="postgresql://timeclock_user:timeclock_password@localhost:5434/timeclock_db"
+DATABASE_URL="postgresql://timeclock_user:timeclock_password@localhost:15437/timeclock"
 ```
 
 ### 4. Run migrations and seed

@@ -6,14 +6,18 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon, LogIn, LogOut, Coffee, Briefcase, MessageSquareText } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { CalendarIcon, LogIn, LogOut, Coffee, Briefcase, MessageSquareText, ClipboardList } from 'lucide-react';
 import { format, subDays, startOfDay, endOfDay } from 'date-fns';
 import { DateRange } from 'react-day-picker';
-import { ClockEvent, Message, Question } from '@prisma/client';
+import { ClockEvent, Message, Question, TaskStatus } from '@prisma/client';
 
 type QuestionWithAnswer = Pick<Question, 'content' | 'answer'>;
 type MessageWithQuestions = Message & { questions: QuestionWithAnswer[] };
-type ActivityEvent = ClockEvent & { message: MessageWithQuestions | null };
+type ActivityEvent = ClockEvent & {
+  task: { id: number; title: string; status: TaskStatus } | null;
+  message: MessageWithQuestions | null;
+};
 type GroupedActivities = { [key: string]: ActivityEvent[] };
 
 interface ActivityHistoryProps {
@@ -88,7 +92,7 @@ export function ActivityHistory({ userId }: ActivityHistoryProps) {
   };
 
   return (
-    <Card>
+    <Card className="rounded-lg">
       <CardHeader>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
@@ -138,9 +142,15 @@ export function ActivityHistory({ userId }: ActivityHistoryProps) {
                       <div key={event.id} className="relative py-1">
                         <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 bg-background border-2 rounded-full z-10"></div>
                         <div className="flex items-center justify-between text-sm ml-6">
-                          <div className="flex items-center gap-1">
+                          <div className="flex flex-wrap items-center gap-2">
                             <Icon className="h-4 w-4 text-muted-foreground" />
                             <p className="font-medium">{text}</p>
+                            {event.task && (
+                              <Badge variant="secondary" className="max-w-full">
+                                <ClipboardList className="h-3 w-3" />
+                                <span className="truncate">{event.task.title}</span>
+                              </Badge>
+                            )}
                             {event.type === 'OUT' && event.message && (
                               <Popover>
                                 <PopoverTrigger asChild>

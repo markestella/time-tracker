@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import { EyeIcon, EyeOffIcon, Info } from 'lucide-react';
 import { validatePassword } from '@/lib/utils';
 import { PasswordStrength } from './PasswordStrength';
-import Image from 'next/image';
+import { BrandMark } from '@/components/brand/BrandMark';
 
 export function RegisterForm() {
   const router = useRouter();
@@ -73,16 +73,10 @@ export function RegisterForm() {
   };
 
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm rounded-lg">
       <CardHeader className="text-center">
         <div className="flex flex-col items-center gap-2 mb-4">
-          <Image
-            src="/thynetwork-logo.png"
-            alt="ThyNetwork Logo"
-            width={64}
-            height={64}
-            priority
-          />
+          <BrandMark />
           <CardTitle className="text-2xl pt-2">Register</CardTitle>
           <CardDescription>Create a new employee account.</CardDescription>
         </div>

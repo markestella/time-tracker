@@ -47,6 +47,7 @@ export async function GET(req: NextRequest) {
         timestamp: { gte: startDate, lte: endDate },
       },
       include: {
+        task: { select: { id: true, title: true, status: true } },
         message: { include: { questions: { select: { content: true, answer: true } } } },
       },
       orderBy: { timestamp: 'desc' },

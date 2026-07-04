@@ -4,12 +4,16 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is missing. Create a .env file from .env.example before running the seed.');
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('Start seeding...');
 
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@thynetwork.com';
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@mckbyte.local';
   const adminUsername = process.env.ADMIN_USERNAME || 'Admin';
   const adminPin = process.env.ADMIN_PASSWORD || 'AdminPass123!';
   const adminFirstName = process.env.ADMIN_FIRST_NAME || 'Admin';

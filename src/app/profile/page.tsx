@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { prisma } from '@/lib/db';
 import { redirect } from 'next/navigation';
-import Image from 'next/image';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { ProfileForm } from '@/components/profile/ProfileForm';
 
 export default async function ProfilePage() {
@@ -26,8 +26,8 @@ export default async function ProfilePage() {
   const backUrl = user.role === 'ADMIN' ? '/admin/dashboard' : '/user/dashboard';
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4">
-      <Card className="w-full max-w-lg">
+    <div className="flex min-h-screen items-center justify-center py-12 px-4">
+      <Card className="w-full max-w-lg rounded-lg">
         <CardHeader className="text-center">
            <Button variant="ghost" size="sm" className="absolute top-4 left-4" asChild>
              <Link href={backUrl}>
@@ -36,12 +36,7 @@ export default async function ProfilePage() {
              </Link>
            </Button>
            <div className="flex flex-col items-center gap-2">
-            <Image
-              src="/thynetwork-logo.png"
-              alt="ThyNetwork Logo"
-              width={64}
-              height={64}
-            />
+            <BrandMark />
             <CardTitle className="text-2xl pt-2">Manage Your Profile</CardTitle>
             <CardDescription>
               Update your personal details and PIN here.

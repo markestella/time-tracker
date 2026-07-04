@@ -25,7 +25,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { LogOut, User as UserIcon, Users, Clock, Coffee } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { UserWithLastEvent } from '@/types';
 import { DashboardStats } from './DashboardStats';
 import { UserList } from './UserList';
@@ -119,20 +119,14 @@ export function AdminDashboardClient({ user, initialUsers, initialStats, initial
   };
   
   return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="container mx-auto max-w-7xl p-4 md:p-8">
+      <div className="mb-8 flex items-center justify-between rounded-lg border bg-card px-4 py-3 shadow-sm">
         <div className="flex items-center gap-4">
-          <Image
-            src="/thynetwork-logo.png"
-            alt="ThyNetwork Logo"
-            width={48}
-            height={48}
-            priority
-          />
+          <BrandMark />
         </div>
         <div className="hidden md:block">
           <h1 className="text-2xl font-bold text-center text-foreground">
-            Admin Dashboard
+            Admin Workspace
           </h1>
         </div>
         <div className="flex items-center gap-2">

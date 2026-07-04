@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import Image from 'next/image';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { Lock, EyeIcon, EyeOffIcon, User } from 'lucide-react';
 
 export function LoginForm() {
@@ -52,20 +52,14 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm rounded-lg">
       <CardHeader className="text-center">
         <div className="flex flex-col items-center gap-2 mb-2">
-          <Image
-            src="/thynetwork-logo.png"
-            alt="ThyNetwork Logo"
-            width={64}
-            height={64}
-            priority
-          />
-          <CardTitle className="text-2xl">ThyNetwork Time Track</CardTitle>
+          <BrandMark />
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
         </div>
         <CardDescription>
-          Enter your credentials to access your account.
+          Sign in to Mckbyte TimeTracker.
         </CardDescription>
       </CardHeader>
       <CardContent>

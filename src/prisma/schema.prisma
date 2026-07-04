@@ -20,6 +20,7 @@ model User {
 
   clockEvents ClockEvent[]
   messages    Message[]
+  tasks       Task[]
 }
 
 model ClockEvent {
@@ -27,8 +28,24 @@ model ClockEvent {
   type      String
   timestamp DateTime @default(now())
   userId    Int
+  taskId    Int?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task      Task?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
   message   Message?
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  completedAt DateTime?
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clockEvents ClockEvent[]
 }
 
 model Message {
@@ -64,4 +81,16 @@ model QuoteOfTheDay {
 enum Role {
   ADMIN
   EMPLOYEE
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
 }

@@ -10,15 +10,27 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { type, message, questions } = await req.json();
+    const { type, message, questions, taskId } = await req.json();
     const userId = parseInt(session.user.id);
 
     if (!['IN', 'OUT', 'BREAK_START', 'BREAK_END'].includes(type)) {
       return NextResponse.json({ error: 'Invalid clock type' }, { status: 400 });
     }
 
+    const selectedTaskId = taskId ? parseInt(taskId) : null;
+
+    if (selectedTaskId) {
+      const task = await prisma.task.findFirst({
+        where: { id: selectedTaskId, userId },
+      });
+
+      if (!task) {
+        return NextResponse.json({ error: 'Task not found' }, { status: 404 });
+      }
+    }
+
     const clockEvent = await prisma.clockEvent.create({
-      data: { type, userId },
+      data: { type, userId, taskId: selectedTaskId },
     });
 
     if (type === 'OUT' && (message || questions?.length > 0)) {
